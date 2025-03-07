@@ -32,42 +32,27 @@ const ProductCart = ({ product }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { deleteProduct, updateProduct } = useProductStore();
   const toast = useToast();
+
   const handleDeleteProduct = async (pid) => {
+    if (!pid) return; // ✅ Prevents errors if `pid` is undefined
     const { success, message } = await deleteProduct(pid);
-    if (!success) {
-      toast({
-        title: "Error",
-        description: message,
-        status: "error",
-        isClosable: true,
-      });
-    } else {
-      toast({
-        title: "Success",
-        description: message,
-        status: "success",
-        isClosable: true,
-      });
-    }
+    toast({
+      title: success ? "Success" : "Error",
+      description: message,
+      status: success ? "success" : "error",
+      isClosable: true,
+    });
   };
 
   const handleUpdateProduct = async (pid, updatedProduct) => {
+    if (!pid) return; // ✅ Prevents errors if `pid` is undefined
     const { success, message } = await updateProduct(pid, updatedProduct);
-    if (!success) {
-      toast({
-        title: "Error",
-        description: message,
-        status: "error",
-        isClosable: true,
-      });
-    } else {
-      toast({
-        title: "Success",
-        description: message,
-        status: "success",
-        isClosable: true,
-      });
-    }
+    toast({
+      title: success ? "Success" : "Error",
+      description: message,
+      status: success ? "success" : "error",
+      isClosable: true,
+    });
     onClose();
   };
 
@@ -84,18 +69,18 @@ const ProductCart = ({ product }) => {
       bg={bg}
     >
       <Image
-        src={product.image}
-        alt={product.name}
+        src={product.image || "https://via.placeholder.com/300"} // ✅ Prevents crashes if image is missing
+        alt={product.name || "No Name"}
         h={48}
         w="full"
         objectFit="cover"
       />
       <Box p={4}>
         <Heading as={"h3"} size={"md"} mb={2}>
-          {product.name}
+          {product.name || "Unnamed Product"} {/* ✅ Prevents undefined name */}
         </Heading>
         <Text fontWeight={"bold"} fontSize={"xl"} color={textColor} mb={4}>
-          ${product.price}
+          ${product.price || "0.00"} {/* ✅ Prevents undefined price */}
         </Text>
         <HStack spacing={2}>
           <IconButton icon={<EditIcon />} onClick={onOpen} colorScheme="blue" />
@@ -124,11 +109,12 @@ const ProductCart = ({ product }) => {
               <Input
                 placeholder="Product Price"
                 name="price"
+                type="number" // ✅ Ensures input is numeric
                 value={updatedProduct.price}
                 onChange={(e) =>
                   setUpdatedProduct({
                     ...updatedProduct,
-                    price: e.target.value,
+                    price: Number(e.target.value), // ✅ Converts to number
                   })
                 }
               />
