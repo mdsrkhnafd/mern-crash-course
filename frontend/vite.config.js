@@ -11,16 +11,14 @@ export default defineConfig({
     },
   },
   build: {
-    outDir: "dist", // ✅ Ensures Vite outputs to dist/
+    outDir: "dist", // ✅ Ensures output goes to "dist/"
+    emptyOutDir: true, // ✅ Clears old builds
+    assetsDir: "assets", // ✅ Ensures static files go inside "assets/"
     rollupOptions: {
       output: {
-        manualChunks(id) {
-          if (id.includes("node_modules")) {
-            if (id.includes("react")) return "react-vendor";
-            if (id.includes("chakra-ui")) return "chakra-vendor";
-            return "vendor";
-          }
-        },
+        entryFileNames: "assets/[name]-[hash].js", // ✅ Fix for missing main.js
+        chunkFileNames: "assets/[name]-[hash].js",
+        assetFileNames: "assets/[name]-[hash][extname]",
       },
     },
     chunkSizeWarningLimit: 1000,
