@@ -3,6 +3,9 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
+console.log("MONGO_URI : ", process.env.MONGO_URI);
+console.log("PORT No. : ", process.env.PORT);
+
 export const connectDB = async () => {
   try {
     console.log("MONGO_URI:", process.env.MONGO_URI); // ✅ Debugging: Check if MONGO_URI is loaded
