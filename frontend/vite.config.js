@@ -6,7 +6,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "http://localhost:8080",
+        target: "https://mern-crash-course-production-6544.up.railway.app",
       },
     },
   },
