@@ -1,26 +1,21 @@
-# Logs
-logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
+# Node.js dependencies
+node_modules/
+package-lock.json
+
+# Backend (Keep `package.json` for dependencies)
+backend/node_modules/
+backend/package-lock.json
+backend/.env
 
 .env
 
-node_modules
-dist
-dist-ssr
-*.local
+# Frontend (Keep `package.json` for dependencies)
+frontend/node_modules/
+frontend/package-lock.json
+frontend/.env
+frontend/dist/  # Ignore built files in development (Vite)
 
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
+# IDE & OS files
 .DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+.vscode/
+.env
