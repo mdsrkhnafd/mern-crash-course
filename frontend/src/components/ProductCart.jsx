@@ -1,18 +1,19 @@
+import { Box, Heading, HStack, IconButton } from "@chakra-ui/react";
 import {
-  Box,
-  Heading,
-  HStack,
-  IconButton,
   Image,
   Modal,
   Text,
   useColorModeValue,
   useToast,
+} from "@chakra-ui/react";
+import {
   useDisclosure,
   ModalOverlay,
   ModalContent,
   ModalHeader,
   ModalCloseButton,
+} from "@chakra-ui/react";
+import {
   ModalBody,
   VStack,
   Input,
